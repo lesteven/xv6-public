@@ -130,6 +130,8 @@ static int (*syscalls[])(void) = {
 [SYS_getreadcount] sys_getreadcount,
 };
 
+int readcount = 0;
+
 void
 syscall(void)
 {
@@ -137,6 +139,9 @@ syscall(void)
   struct proc *curproc = myproc();
 
   num = curproc->tf->eax;
+  if (num == SYS_read) {
+    readcount++;
+  }
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     curproc->tf->eax = syscalls[num]();
   } else {

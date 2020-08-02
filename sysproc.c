@@ -92,5 +92,5 @@ sys_uptime(void)
 int
 sys_getreadcount(void)
 {
-  return 10;
+  return readcount;
 }
